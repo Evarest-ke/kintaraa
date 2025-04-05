@@ -1,0 +1,20 @@
+{
+  "name": "kintaraa",
+  "version": "0.0.0",
+  "private": true,
+  "workspaces": [
+    "src/kintaraa_frontend"
+  ],
+  "scripts": {
+    "build": "npm run build --workspace=src/kintaraa_frontend",
+    "prebuild": ""
+  },
+  "devDependencies": {
+    "vite": "^4.5.5"
+  },
+  "dependencies": {
+    "path": "^0.12.7",
+    "react-hot-toast": "^2.4.1",
+    "zod": "^3.23.8"
+  }
+}

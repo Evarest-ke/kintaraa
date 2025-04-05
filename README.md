@@ -1,1 +1,185 @@
-# kintaraa
+# Kintaraa
+
+Kintaraa is a platform that connects survivors of gender-based violence with essential services, including medical, legal, counseling, and police assistance.
+
+## Project Structure
+
+The application is split into two main parts:
+
+1. **Backend API**: An Express.js API server with MongoDB database
+2. **Frontend**: A React.js application built with Vite
+
+## Features
+
+- User authentication (survivor, medical, legal, counselor, police, chv)
+- Service request submission and tracking
+- Appointment scheduling
+- Token rewards system
+- Provider management
+- Admin dashboard
+
+## Setup and Installation
+
+### Prerequisites
+
+- Node.js (v16+)
+- MongoDB
+
+### Backend Setup
+
+1. Navigate to the backend directory:
+   ```
+   cd backend
+   ```
+
+2. Install dependencies:
+   ```
+   npm install
+   ```
+
+3. Create a `.env` file in the backend directory with the following content:
+   ```
+   PORT=5000
+   MONGODB_URI=mongodb://localhost:27017/kintaraa
+   JWT_SECRET=kintaraasecret123456
+   ```
+
+4. Start the development server:
+   ```
+   npm run dev
+   ```
+
+### Frontend Setup
+
+1. Navigate to the frontend directory:
+   ```
+   cd src/kintaraa_frontend
+   ```
+
+2. Install dependencies:
+   ```
+   npm install
+   ```
+
+3. Start the development server:
+   ```
+   npm run dev
+   ```
+
+## Usage
+
+- The backend API runs on `http://localhost:5000`
+- The frontend application runs on `http://localhost:5173`
+
+## Development
+
+### Backend API
+
+The API follows RESTful principles and provides the following endpoints:
+
+- `/api/auth` - Authentication routes
+- `/api/services` - Service-related routes
+- `/api/tokens` - Token system routes
+
+### Frontend Application
+
+The frontend is built with React and uses:
+
+- React Router for routing
+- React Hook Form for form handling
+- Tailwind CSS for styling
+
+## Deployment
+
+### Backend Deployment
+
+1. Build the application:
+   ```
+   cd backend
+   npm run build
+   ```
+
+2. Deploy to your hosting provider of choice (e.g., Heroku, AWS, DigitalOcean)
+
+### Frontend Deployment
+
+1. Build the application:
+   ```
+   cd src/kintaraa_frontend
+   npm run build
+   ```
+
+2. Deploy the `dist` directory to a static hosting service (e.g., Netlify, Vercel, Firebase)
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+# Live Project
+You can view the live version of the kintsugi project on the Internet Computer mainnet at the following links:
+
+- Frontend Canister: https://24dyw-2yaaa-aaaam-adxmq-cai.icp0.io/
+
+- Backend Canister: Accessible through API calls or within the frontend.
+
+To get started, you might want to explore the project directory structure and the default configuration file. Working with this project in your development environment will not affect any production deployment or identity tokens.
+
+To learn more before you start working with `kintaraa`, see the following documentation available online:
+
+- [Quick Start](https://internetcomputer.org/docs/current/developer-docs/setup/deploy-locally)
+- [SDK Developer Tools](https://internetcomputer.org/docs/current/developer-docs/setup/install)
+- [Rust Canister Development Guide](https://internetcomputer.org/docs/current/developer-docs/backend/rust/)
+- [ic-cdk](https://docs.rs/ic-cdk)
+- [ic-cdk-macros](https://docs.rs/ic-cdk-macros)
+- [Candid Introduction](https://internetcomputer.org/docs/current/developer-docs/backend/candid/)
+
+If you want to start working on your project right away, you might want to try the following commands:
+
+```bash
+cd kintaraa/
+dfx help
+dfx canister --help
+```
+
+## Running the project locally
+
+If you want to test your project locally, you can use the following commands:
+
+```bash
+# Starts the replica, running in the background
+dfx start --background
+
+# Deploys your canisters to the replica and generates your candid interface
+dfx deploy
+```
+
+Once the job completes, your application will be available at `http://localhost:4943?canisterId={asset_canister_id}`.
+
+If you have made changes to your backend canister, you can generate a new candid interface with
+
+```bash
+npm run generate
+```
+
+at any time. This is recommended before starting the frontend development server, and will be run automatically any time you run `dfx deploy`.
+
+If you are making frontend changes, you can start a development server with
+
+```bash
+npm start
+```
+
+Which will start a server at `http://localhost:8080`, proxying API requests to the replica at port 4943.
+
+### Note on frontend environment variables
+
+If you are hosting frontend code somewhere without using DFX, you may need to make one of the following adjustments to ensure your project does not fetch the root key in production:
+
+- set`DFX_NETWORK` to `ic` if you are using Webpack
+- use your own preferred method to replace `process.env.DFX_NETWORK` in the autogenerated declarations
+  - Setting `canisters -> {asset_canister_id} -> declarations -> env_override to a string` in `dfx.json` will replace `process.env.DFX_NETWORK` with the string in the autogenerated declarations
+- Write your own `createActor` constructor
